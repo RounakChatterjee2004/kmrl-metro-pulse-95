@@ -28,37 +28,28 @@ const translations = {
     operations: 'Operations',
     connectors: 'System Connectors',
     departments: 'Departments',
-    fetchEmail: 'Fetch from Email',
-    processing: 'Processing...',
-    fetchingDocument: 'Fetching document from email...',
-    documentFetched: 'Document fetched successfully',
-    auctionNotice: 'Public Auction Notice - KMRL Movable Property',
-    welcomeKmrl: 'Welcome to KMRL Document Processing System',
-    kmrlFullName: 'Kochi Metro Rail Limited',
-    kmrlDocuMindDashboard: 'KMRL DocuMind Dashboard',
-    intelligentDocProcessing: 'Intelligent Document Processing System',
-    recentActivity: 'Recent Activity',
-    quickActions: 'Quick Actions',
-    uploadDocument: 'Upload Document',
-    searchFiles: 'Search Files',
-    viewAlerts: 'View Alerts',
-    generateReport: 'Generate Report',
-    documentReceivedEmail: 'Document Received via Email',
-    kmrlAuctionNoticeReceived: 'KMRL Auction Notice received in email system',
-    retrievingFromEmailServer: 'Retrieving document from email server...',
-    auctionNoticeProcessed: 'KMRL Auction Notice has been processed and is ready',
-    auctionNoticeReady: 'Auction Notice ready for AI analysis',
-    aiProcessingComplete: 'AI Processing Complete',
-    documentReadyForQueries: 'Document is now ready for intelligent queries',
-    newDocumentReceived: 'New Document Received',
-    // Metric translations
-    totalDocuments: 'Total Documents',
-    criticalAlerts: 'Critical Alerts',
-    departmentsActive: 'Departments Active',
-    docs: 'docs',
+    
+    // Header translations
+    notifications: 'Notifications',
+    allNotifications: 'All Notifications',
+    markAllAsRead: 'Mark all as read',
+    
+    // Dashboard metrics
+    thisMonth: 'this month',
+    previousMonth: 'vs previous month',
+    noChangeFromLastMonth: 'No change from last month',
+    increaseFromLastMonth: 'increase from last month',
+    decreaseFromLastMonth: 'decrease from last month',
+    upFromLastMonth: 'up from last month',
+    downFromLastMonth: 'down from last month',
+    
+    // Time units
     active: 'active',
+    pending: 'pending',
+    docs: 'docs',
     depts: 'depts',
     thisWeek: 'this week',
+    
     // Activity translations
     trackMaintenanceUpdated: 'Track Maintenance Schedule Updated',
     maintenanceScheduleDesc: 'Q4 2024 maintenance schedule has been uploaded with critical updates',
@@ -69,6 +60,7 @@ const translations = {
     complianceReviewRequired: 'Compliance Review Required',
     cmrsReportDesc: 'CMRS report requires immediate attention',
     hoursAgo: 'hours ago',
+    
     // Connector translations
     connected: 'Connected',
     disconnected: 'Disconnected',
@@ -85,6 +77,7 @@ const translations = {
     cloudSyncDesc: 'Cloud storage synchronization',
     vendorApiDesc: 'External vendor document API',
     manageAll: 'Manage All',
+    
     // Upload page translations
     uploadDocuments: 'Upload Documents',
     uploadToDocuMind: 'Upload new documents to the DocuMind AI processing system',
@@ -113,43 +106,50 @@ const translations = {
     generateSummaries: 'Generate searchable summaries',
     multilingualProcessing: 'Apply multilingual processing (English/Malayalam)',
     processingTime: 'Processing typically takes 1-3 minutes depending on document size and complexity.',
+    
     // Documents page translations
     manageSearchDocuments: 'Manage and search through all your documents',
     showingResults: 'Showing',
     ofDocuments: 'of',
     documentsText: 'documents',
-    clearAllFilters: 'Clear all filters',
-    noDocumentsFound: 'No documents found',
-    adjustSearchTerms: 'Try adjusting your search terms or filters',
     latestFirst: 'Latest First',
     titleAZ: 'Title A-Z',
     urgency: 'Urgency',
     documentType: 'Document Type',
+    clearAllFilters: 'Clear All Filters',
+    noDocumentsFound: 'No Documents Found',
+    adjustSearchTerms: 'Try adjusting your search terms or filters',
+    
+    // Role selector
+    viewAs: 'View as',
+    overallSystemOverview: 'Overall system overview',
+    
     // Auction document specific Q&A
     auctionQuestions: [
       'What is the reserve price for the KMRL auction?',
       'When is the auction date and time?',
       'What items are included in the auction?',
-      'Where can I inspect the items before auction?',
+      'Where can I inspect the items before the auction?',
       'What is the earnest money deposit amount?',
       'What are the terms and conditions for bidding?'
     ],
     auctionAnswers: [
-      'The reserve price for the KMRL movable property auction is Rs. 25,000/- (Rupees Twenty five thousand only).',
-      'The auction is scheduled for 14/03/2024 at 11:30 AM at JLN Stadium Metro Station.',
-      'The auction includes various items like kiosk structure, electronic equipment, kitchen items, and 143 glass bottles of soda/juice among others.',
-      'Item inspection can be done on 07-03-2024 & 11-03-2024 between 10:30 AM and 5:30 PM with prior permission from Estate Officer (0484-2846721).',
-      'The earnest money deposit (EMD) required is Rs. 5,000/- (Rupees Five Thousand Only).',
-      'The auction is conducted on "as is where is" basis without recourse. Bidders must inspect items beforehand and cannot raise objections later.'
-    ],
+      'The auction notice states that all items are sold on "as is where is" basis. No specific reserve price is mentioned for individual items.',
+      'The auction is scheduled for December 28, 2024 at 10:00 AM at the KMRL Administrative Building.',
+      'The auction includes railway track components (rails, sleepers, fastening systems), construction materials (cement, steel reinforcement), electrical equipment (cables, transformers, control panels), office furniture (desks, chairs, filing cabinets), and vehicle parts (bus spare parts and maintenance equipment).',
+      'Inspection of items can be done on December 20-21, 2024 at the KMRL Administrative Building.',
+      'The registration fee is ₹5,000 (non-refundable). This serves as the earnest money deposit.',
+      'All items are sold "as is where is" basis. Payment must be made within 7 days of the auction. Registration fee of ₹5,000 is required and is non-refundable.'
+    ]
   },
+  
   hi: {
     dashboard: 'डैशबोर्ड',
     documents: 'दस्तावेज़',
     upload: 'अपलोड',
     search: 'खोज',
     alerts: 'अलर्ट',
-    auditLogs: 'ऑडिट लॉग्स',
+    auditLogs: 'ऑडिट लॉग',
     analytics: 'एनालिटिक्स',
     settings: 'सेटिंग्स',
     engineering: 'इंजीनियरिंग',
@@ -158,71 +158,61 @@ const translations = {
     safety: 'सुरक्षा',
     legal: 'कानूनी',
     operations: 'संचालन',
-    connectors: 'सिस्टम कनेक्टर्स',
+    connectors: 'सिस्टम कनेक्टर',
     departments: 'विभाग',
-    fetchEmail: 'ईमेल से प्राप्त करें',
-    processing: 'प्रोसेसिंग...',
-    fetchingDocument: 'ईमेल से दस्तावेज़ प्राप्त कर रहे हैं...',
-    documentFetched: 'दस्तावेज़ सफलतापूर्वक प्राप्त हुआ',
-    auctionNotice: 'सार्वजनिक नीलामी सूचना - KMRL चल संपत्ति',
-    welcomeKmrl: 'KMRL दस्तावेज़ प्रसंस्करण प्रणाली में आपका स्वागत है',
-    kmrlFullName: 'कोच्चि मेट्रो रेल लिमिटेड',
-    kmrlDocuMindDashboard: 'KMRL DocuMind डैशबोर्ड',
-    intelligentDocProcessing: 'बुद्धिमान दस्तावेज़ प्रसंस्करण प्रणाली',
-    recentActivity: 'हाल की गतिविधि',
-    quickActions: 'त्वरित क्रियाएं',
-    uploadDocument: 'दस्तावेज़ अपलोड करें',
-    searchFiles: 'फ़ाइलें खोजें',
-    viewAlerts: 'अलर्ट देखें',
-    generateReport: 'रिपोर्ट जेनरेट करें',
-    documentReceivedEmail: 'ईमेल के माध्यम से दस्तावेज़ प्राप्त हुआ',
-    kmrlAuctionNoticeReceived: 'KMRL नीलामी सूचना ईमेल सिस्टम में प्राप्त हुई',
-    retrievingFromEmailServer: 'ईमेल सर्वर से दस्तावेज़ प्राप्त कर रहे हैं...',
-    auctionNoticeProcessed: 'KMRL नीलामी सूचना प्रोसेस हो गई है और तैयार है',
-    auctionNoticeReady: 'नीलामी सूचना AI विश्लेषण के लिए तैयार',
-    aiProcessingComplete: 'AI प्रसंस्करण पूर्ण',
-    documentReadyForQueries: 'दस्तावेज़ अब बुद्धिमान प्रश्नों के लिए तैयार है',
-    newDocumentReceived: 'नया दस्तावेज़ प्राप्त हुआ',
-    // Metric translations
-    totalDocuments: 'कुल दस्तावेज़',
-    criticalAlerts: 'महत्वपूर्ण अलर्ट',
-    departmentsActive: 'सक्रिय विभाग',
-    docs: 'डॉक्स',
+    
+    // Header translations
+    notifications: 'सूचनाएं',
+    allNotifications: 'सभी सूचनाएं',
+    markAllAsRead: 'सभी को पढ़ा हुआ मार्क करें',
+    
+    // Dashboard metrics
+    thisMonth: 'इस महीने',
+    previousMonth: 'पिछले महीने की तुलना में',
+    noChangeFromLastMonth: 'पिछले महीने से कोई बदलाव नहीं',
+    increaseFromLastMonth: 'पिछले महीने से वृद्धि',
+    decreaseFromLastMonth: 'पिछले महीने से कमी',
+    upFromLastMonth: 'पिछले महीने से ऊपर',
+    downFromLastMonth: 'पिछले महीने से नीचे',
+    
+    // Time units
     active: 'सक्रिय',
+    pending: 'लंबित',
+    docs: 'दस्तावेज़',
     depts: 'विभाग',
     thisWeek: 'इस सप्ताह',
+    
     // Activity translations
-    trackMaintenanceUpdated: 'ट्रैक रखरखाव अनुसूची अपडेट',
-    maintenanceScheduleDesc: 'Q4 2024 रखरखाव अनुसूची महत्वपूर्ण अपडेट के साथ अपलोड की गई',
-    safetyNoticePublished: 'सुरक्षा सूचना प्रकाशित',
+    trackMaintenanceUpdated: 'ट्रैक रखरखाव अनुसूची अपडेट की गई',
+    maintenanceScheduleDesc: 'Q4 2024 रखरखाव अनुसूची महत्वपूर्ण अपडेट के साथ अपलोड की गई है',
+    safetyNoticePublished: 'सुरक्षा नोटिस प्रकाशित',
     safetyGuidelinesDesc: 'मलयालम में नई प्लेटफॉर्म सुरक्षा दिशानिर्देश उपलब्ध',
-    invoiceProcessingComplete: 'चालान प्रसंस्करण पूर्ण',
+    invoiceProcessingComplete: 'इनवॉइस प्रसंस्करण पूर्ण',
     siemensPaymentDesc: 'सीमेंस विक्रेता भुगतान सफलतापूर्वक प्रसंस्करित',
     complianceReviewRequired: 'अनुपालन समीक्षा आवश्यक',
     cmrsReportDesc: 'CMRS रिपोर्ट को तत्काल ध्यान की आवश्यकता',
     hoursAgo: 'घंटे पहले',
-    // Role selector
-    viewAs: 'के रूप में देखें',
-    overallSystemOverview: 'समग्र सिस्टम अवलोकन',
+    
     // Connector translations
-    connected: 'कनेक्ट किया गया',
-    disconnected: 'डिस्कनेक्ट किया गया',
-    syncing: 'सिंक हो रहा है',
+    connected: 'कनेक्टेड',
+    disconnected: 'डिसकनेक्टेड',
+    syncing: 'सिंकिंग',
     lastSync: 'अंतिम सिंक',
     minutesAgo: 'मिनट पहले',
-    syncingNow: 'अब सिंक हो रहा है...',
+    syncingNow: 'अभी सिंक हो रहा है...',
     kmrlEmailSystem: 'KMRL ईमेल सिस्टम',
     metroDatabase: 'मेट्रो डेटाबेस',
-    documentCloud: 'दस्तावेज़ क्लाउड',
+    documentCloud: 'डॉक्यूमेंट क्लाउड',
     vendorPortalApi: 'विक्रेता पोर्टल API',
-    emailIntegrationDesc: 'दस्तावेज़ रिसेप्शन के लिए आधिकारिक KMRL ईमेल इंटीग्रेशन',
+    emailIntegrationDesc: 'दस्तावेज़ रिसेप्शन के लिए आधिकारिक KMRL ईमेल एकीकरण',
     databaseConnectionDesc: 'मुख्य परिचालन डेटाबेस कनेक्शन',
     cloudSyncDesc: 'क्लाउड स्टोरेज सिंक्रोनाइज़ेशन',
     vendorApiDesc: 'बाहरी विक्रेता दस्तावेज़ API',
     manageAll: 'सभी प्रबंधित करें',
+    
     // Upload page translations
     uploadDocuments: 'दस्तावेज़ अपलोड करें',
-    uploadToDocuMind: 'DocuMind AI प्रसंस्करण प्रणाली में नए दस्तावेज़ अपलोड करें',
+    uploadToDocuMind: 'DocuMind AI प्रसंस्करण सिस्टम में नए दस्तावेज़ अपलोड करें',
     uploadGuidelines: 'अपलोड दिशानिर्देश',
     supportedFileTypes: 'समर्थित फ़ाइल प्रकार',
     pdfDocuments: 'PDF दस्तावेज़ (.pdf)',
@@ -248,18 +238,24 @@ const translations = {
     generateSummaries: 'खोजने योग्य सारांश उत्पन्न करें',
     multilingualProcessing: 'बहुभाषी प्रसंस्करण लागू करें (अंग्रेजी/मलयालम)',
     processingTime: 'दस्तावेज़ के आकार और जटिलता के आधार पर प्रसंस्करण में आमतौर पर 1-3 मिनट लगते हैं।',
+    
     // Documents page translations
     manageSearchDocuments: 'अपने सभी दस्तावेज़ों का प्रबंधन और खोज करें',
     showingResults: 'दिखा रहे हैं',
     ofDocuments: 'में से',
     documentsText: 'दस्तावेज़',
-    clearAllFilters: 'सभी फ़िल्टर साफ़ करें',
-    noDocumentsFound: 'कोई दस्तावेज़ नहीं मिला',
-    adjustSearchTerms: 'अपने खोज शब्दों या फ़िल्टर को समायोजित करने का प्रयास करें',
     latestFirst: 'नवीनतम पहले',
     titleAZ: 'शीर्षक A-Z',
     urgency: 'तात्कालिकता',
     documentType: 'दस्तावेज़ प्रकार',
+    clearAllFilters: 'सभी फ़िल्टर साफ़ करें',
+    noDocumentsFound: 'कोई दस्तावेज़ नहीं मिला',
+    adjustSearchTerms: 'अपने खोज शब्दों या फ़िल्टर को समायोजित करने का प्रयास करें',
+    
+    // Role selector
+    viewAs: 'के रूप में देखें',
+    overallSystemOverview: 'समग्र सिस्टम अवलोकन',
+    
     // Auction document specific Q&A
     auctionQuestions: [
       'KMRL नीलामी की आरक्षित कीमत क्या है?',
@@ -270,75 +266,65 @@ const translations = {
       'बोली लगाने के नियम और शर्तें क्या हैं?'
     ],
     auctionAnswers: [
-      'KMRL चल संपत्ति नीलामी की आरक्षित कीमत रु. 25,000/- (रुपये पच्चीस हजार मात्र) है।',
-      'नीलामी 14/03/2024 को सुबह 11:30 बजे JLN स्टेडियम मेट्रो स्टेशन पर निर्धारित है।',
-      'नीलामी में कियोस्क संरचना, इलेक्ट्रॉनिक उपकरण, रसोई की वस्तुएं, और अन्य वस्तुओं के साथ 143 सोडा/जूस के कांच की बोतलें शामिल हैं।',
-      'वस्तुओं का निरीक्षण 07-03-2024 और 11-03-2024 को सुबह 10:30 से शाम 5:30 के बीच एस्टेट ऑफिसर (0484-2846721) की पूर्व अनुमति से किया जा सकता है।',
-      'आवश्यक बयाना राशि जमा (EMD) रु. 5,000/- (रुपये पांच हजार मात्र) है।',
-      'नीलामी "जैसी है जहाँ है" के आधार पर बिना किसी सहारे के आयोजित की जाती है। बोलीदाताओं को पहले से वस्तुओं का निरीक्षण करना होगा और बाद में आपत्ति नहीं उठा सकते।'
-    ],
+      'नीलामी सूचना में कहा गया है कि सभी वस्तुएं "जैसी हैं वैसी हैं" के आधार पर बेची जाती हैं। व्यक्तिगत वस्तुओं की कोई विशिष्ट आरक्षित कीमत नहीं दी गई है।',
+      'नीलामी 28 दिसंबर, 2024 को सुबह 10:00 बजे KMRL प्रशासनिक भवन में निर्धारित है।',
+      'नीलामी में रेलवे ट्रैक घटक (रेल, स्लीपर, फास्टनिंग सिस्टम), निर्माण सामग्री (सीमेंट, स्टील रीइन्फोर्समेंट), विद्युत उपकरण (केबल, ट्रांसफार्मर, कंट्रोल पैनल), कार्यालय फर्नीचर (डेस्क, कुर्सियां, फाइलिंग कैबिनेट), और वाहन पुर्जे (बस स्पेयर पार्ट्स और रखरखाव उपकरण) शामिल हैं।',
+      'वस्तुओं का निरीक्षण 20-21 दिसंबर, 2024 को KMRL प्रशासनिक भवन में किया जा सकता है।',
+      'पंजीकरण शुल्क ₹5,000 (गैर-वापसी योग्य) है। यह बयाना राशि जमा के रूप में काम करता है।',
+      'सभी वस्तुएं "जैसी हैं वैसी हैं" के आधार पर बेची जाती हैं। नीलामी के 7 दिनों के भीतर भुगतान करना होगा। ₹5,000 का पंजीकरण शुल्क आवश्यक है और यह गैर-वापसी योग्य है।'
+    ]
   },
+  
   ml: {
-    dashboard: 'ഡാഷ്‌ബോർഡ്',
+    dashboard: 'ഡാഷ്ബോർഡ്',
     documents: 'രേഖകൾ',
-    upload: 'അപ്‌ലോഡ്',
+    upload: 'അപ്ലോഡ്',
     search: 'തിരയുക',
-    alerts: 'അലേർട്ടുകൾ',
+    alerts: 'അലർട്ടുകൾ',
     auditLogs: 'ഓഡിറ്റ് ലോഗുകൾ',
-    analytics: 'അനാലിറ്റിക്സ്',
+    analytics: 'അനലിറ്റിക്സ്',
     settings: 'ക്രമീകരണങ്ങൾ',
     engineering: 'എഞ്ചിനീയറിംഗ്',
     finance: 'ധനകാര്യം',
-    hr: 'മനുഷ്യവിഭവശേഷി',
+    hr: 'മനുഷ്യ വിഭവങ്ങൾ',
     safety: 'സുരക്ഷ',
-    legal: 'നിയമപരമായ',
+    legal: 'നിയമപരം',
     operations: 'പ്രവർത്തനങ്ങൾ',
     connectors: 'സിസ്റ്റം കണക്ടറുകൾ',
     departments: 'വകുപ്പുകൾ',
-    fetchEmail: 'ഇമെയിലിൽ നിന്നും എടുക്കുക',
-    processing: 'പ്രോസസ്സിംഗ്...',
-    fetchingDocument: 'ഇമെയിലിൽ നിന്നും രേഖ എടുക്കുന്നു...',
-    documentFetched: 'രേഖ വിജയകരമായി എടുത്തു',
-    auctionNotice: 'പൊതു ലേലം അറിയിപ്പ് - KMRL ചരക്ക് സ്വത്ത്',
-    welcomeKmrl: 'KMRL രേഖ പ്രോസസ്സിംഗ് സിസ്റ്റത്തിലേക്ക് സ്വാഗതം',
-    kmrlFullName: 'കൊച്ചി മെട്രോ റെയിൽ ലിമിറ്റഡ്',
-    kmrlDocuMindDashboard: 'KMRL DocuMind ഡാഷ്‌ബോർഡ്',
-    intelligentDocProcessing: 'ബുദ്ധിമുട്ടുള്ള രേഖ പ്രോസസ്സിംഗ് സിസ്റ്റം',
-    recentActivity: 'സമീപകാല പ്രവർത്തനം',
-    quickActions: 'വേഗത്തിലുള്ള പ്രവർത്തനങ്ങൾ',
-    uploadDocument: 'രേഖ അപ്‌ലോഡ് ചെയ്യുക',
-    searchFiles: 'ഫയലുകൾ തിരയുക',
-    viewAlerts: 'അലേർട്ടുകൾ കാണുക',
-    generateReport: 'റിപ്പോർട്ട് ജനറേറ്റ് ചെയ്യുക',
-    documentReceivedEmail: 'ഇമെയിൽ വഴി രേഖ ലഭിച്ചു',
-    kmrlAuctionNoticeReceived: 'KMRL ലേലം അറിയിപ്പ് ഇമെയിൽ സിസ്റ്റത്തിൽ ലഭിച്ചു',
-    retrievingFromEmailServer: 'ഇമെയിൽ സെർവറിൽ നിന്ന് രേഖ എടുക്കുന്നു...',
-    auctionNoticeProcessed: 'KMRL ലേലം അറിയിപ്പ് പ്രോസസ്സ് ചെയ്യപ്പെട്ടു, തയ്യാറാണ്',
-    auctionNoticeReady: 'ലേലം അറിയിപ്പ് AI വിശകലനത്തിനായി തയ്യാറ്',
-    aiProcessingComplete: 'AI പ്രോസസ്സിംഗ് പൂർത്തിയായി',
-    documentReadyForQueries: 'രേഖ ഇപ്പോൾ ബുദ്ധിമാനായ ചോദ്യങ്ങൾക്കായി തയ്യാറാണ്',
-    newDocumentReceived: 'പുതിയ രേഖ ലഭിച്ചു',
-    // Metric translations
-    totalDocuments: 'മൊത്തം രേഖകൾ',
-    criticalAlerts: 'ക്രിട്ടിക്കൽ അലേർട്ടുകൾ',
-    departmentsActive: 'സജീവ വകുപ്പുകൾ',
-    docs: 'ഡോക്സ്',
+    
+    // Header translations
+    notifications: 'അറിയിപ്പുകൾ',
+    allNotifications: 'എല്ലാ അറിയിപ്പുകളും',
+    markAllAsRead: 'എല്ലാം വായിച്ചതായി അടയാളപ്പെടുത്തുക',
+    
+    // Dashboard metrics
+    thisMonth: 'ഈ മാസം',
+    previousMonth: 'മുൻ മാസത്തെ അപേക്ഷിച്ച്',
+    noChangeFromLastMonth: 'കഴിഞ്ഞ മാസത്തിൽ നിന്ന് മാറ്റമില്ല',
+    increaseFromLastMonth: 'കഴിഞ്ഞ മാസത്തിൽ നിന്ന് വർദ്ധനവ്',
+    decreaseFromLastMonth: 'കഴിഞ്ഞ മാസത്തിൽ നിന്ന് കുറവ്',
+    upFromLastMonth: 'കഴിഞ്ഞ മാസത്തിൽ നിന്ന് മുകളിലേക്ക്',
+    downFromLastMonth: 'കഴിഞ്ഞ മാസത്തിൽ നിന്ന് താഴേക്ക്',
+    
+    // Time units
     active: 'സജീവം',
+    pending: 'തീർപ്പുകൽപ്പിക്കാത്ത',
+    docs: 'രേഖകൾ',
     depts: 'വകുപ്പുകൾ',
-    thisWeek: 'ഈ ആഴ്‌ച',
+    thisWeek: 'ഈ ആഴ്ച',
+    
     // Activity translations
-    trackMaintenanceUpdated: 'ട്രാക്ക് പരിപാലന ഷെഡ്യൂൾ അപ്‌ഡേറ്റ്',
-    maintenanceScheduleDesc: 'Q4 2024 പരിപാലന ഷെഡ്യൂൾ നിർണായക അപ്‌ഡേറ്റുകളോടെ അപ്‌ലോഡ് ചെയ്തു',
+    trackMaintenanceUpdated: 'ട്രാക്ക് മെയിന്റനൻസ് ഷെഡ്യൂൾ അപ്ഡേറ്റ് ചെയ്തു',
+    maintenanceScheduleDesc: 'Q4 2024 മെയിന്റനൻസ് ഷെഡ്യൂൾ നിർണായക അപ്ഡേറ്റുകളോടെ അപ്ലോഡ് ചെയ്തു',
     safetyNoticePublished: 'സുരക്ഷാ അറിയിപ്പ് പ്രസിദ്ധീകരിച്ചു',
-    safetyGuidelinesDesc: 'മലയാളത്തിൽ പുതിയ പ്ലാറ്റ്‌ഫോം സുരക്ഷാ മാർഗ്ഗനിർദ്ദേശങ്ങൾ ലഭ്യം',
-    invoiceProcessingComplete: 'ഇൻവോയ്‌സ് പ്രോസസ്സിംഗ് പൂർത്തിയായി',
-    siemensPaymentDesc: 'സീമൻസ് വെണ്ടർ പേയ്‌മെന്റ് വിജയകരമായി പ്രോസസ്സ് ചെയ്തു',
-    complianceReviewRequired: 'കംപ്ലയൻസ് റിവ്യൂ ആവശ്യം',
+    safetyGuidelinesDesc: 'മലയാളത്തിൽ പുതിയ പ്ലാറ്റ്ഫോം സുരക്ഷാ മാർഗ്ഗനിർദ്ദേശങ്ങൾ ലഭ്യം',
+    invoiceProcessingComplete: 'ഇൻവോയിസ് പ്രോസസ്സിംഗ് പൂർത്തിയായി',
+    siemensPaymentDesc: 'സീമെൻസ് വെണ്ടർ പേയ്മെന്റ് വിജയകരമായി പ്രോസസ്സ് ചെയ്തു',
+    complianceReviewRequired: 'കംപ്ലയൻസ് അവലോകനം ആവശ്യം',
     cmrsReportDesc: 'CMRS റിപ്പോർട്ടിന് അടിയന്തര ശ്രദ്ധ ആവശ്യം',
     hoursAgo: 'മണിക്കൂർ മുമ്പ്',
-    // Role selector
-    viewAs: 'ആയി കാണുക',
-    overallSystemOverview: 'മൊത്തത്തിലുള്ള സിസ്റ്റം അവലോകനം',
+    
     // Connector translations
     connected: 'കണക്റ്റഡ്',
     disconnected: 'ഡിസ്കണക്റ്റഡ്',
@@ -355,6 +341,70 @@ const translations = {
     cloudSyncDesc: 'ക്ലൗഡ് സ്റ്റോറേജ് സിൻക്രൊണൈസേഷൻ',
     vendorApiDesc: 'ബാഹ്യ വെണ്ടർ ഡോക്യുമെന്റ് API',
     manageAll: 'എല്ലാം കൈകാര്യം ചെയ്യുക',
+    
+    // Upload page translations
+    uploadDocuments: 'രേഖകൾ അപ്ലോഡ് ചെയ്യുക',
+    uploadToDocuMind: 'DocuMind AI പ്രോസസ്സിംഗ് സിസ്റ്റത്തിൽ പുതിയ രേഖകൾ അപ്ലോഡ് ചെയ്യുക',
+    uploadGuidelines: 'അപ്ലോഡ് മാർഗ്ഗനിർദ്ദേശങ്ങൾ',
+    supportedFileTypes: 'പിന്തുണയുള്ള ഫയൽ തരങ്ങൾ',
+    pdfDocuments: 'PDF രേഖകൾ (.pdf)',
+    msWord: 'Microsoft Word (.doc, .docx)',
+    msExcel: 'Microsoft Excel (.xls, .xlsx)',
+    images: 'ചിത്രങ്ങൾ (.png, .jpg, .jpeg, .gif)',
+    bestPractices: 'മികച്ച രീതികൾ',
+    descriptiveFileNames: 'വിവരണാത്മക ഫയൽ പേരുകൾ ഉപയോഗിക്കുക',
+    maxFileSize: 'പരമാവധി ഫയൽ വലുപ്പം: 20MB',
+    readableDocuments: 'രേഖകൾ വായിക്കാവുന്നതാണെന്ന് ഉറപ്പാക്കുക',
+    relevantMetadata: 'പ്രസക്തമായ മെറ്റാഡേറ്റ ഉൾപ്പെടുത്തുക',
+    aiPoweredUpload: 'AI-പവർഡ് ഡോക്യുമെന്റ് അപ്ലോഡ്',
+    dragDropFiles: 'നിങ്ങളുടെ ഫയലുകൾ ഇവിടെ വലിച്ചിട്ട് വിടുക, അല്ലെങ്കിൽ ബ്രൗസ് ചെയ്യാൻ ക്ലിക്ക് ചെയ്യുക',
+    supportsFileTypes: 'PDF, Word, Excel, Images എന്നിവയെ പിന്തുണയ്ക്കുന്നു (ഫയലിന് പരമാവധി 20MB)',
+    automaticAISummarization: 'ഓട്ടോമാറ്റിക് AI സംഗ്രഹവും മെറ്റാഡേറ്റ എക്സ്ട്രാക്ഷനും',
+    browseFiles: 'ഫയലുകൾ ബ്രൗസ് ചെയ്യുക',
+    uploadedFiles: 'അപ്ലോഡ് ചെയ്ത ഫയലുകൾ',
+    processingInfo: 'പ്രോസസ്സിംഗ് വിവരങ്ങൾ',
+    aiProcessingDesc: 'അപ്ലോഡ് ചെയ്തതിന് ശേഷം, നിങ്ങളുടെ രേഖകൾ ഞങ്ങളുടെ AI സിസ്റ്റം ഓട്ടോമാറ്റിക്കായി പ്രോസസ്സ് ചെയ്യും:',
+    extractKeyInfo: 'പ്രധാന വിവരങ്ങളും മെറ്റാഡേറ്റയും എക്സ്ട്രാക്റ്റ് ചെയ്യുക',
+    classifyDocType: 'ഡോക്യുമെന്റ് തരവും വകുപ്പും വർഗ്ഗീകരിക്കുക',
+    identifyUrgency: 'അടിയന്തിര നിലയും മുൻഗണനയും തിരിച്ചറിയുക',
+    generateSummaries: 'തിരയാവുന്ന സംഗ്രഹങ്ങൾ സൃഷ്ടിക്കുക',
+    multilingualProcessing: 'ബഹുഭാഷാ പ്രോസസ്സിംഗ് പ്രയോഗിക്കുക (ഇംഗ്ലീഷ്/മലയാളം)',
+    processingTime: 'ഡോക്യുമെന്റ് വലുപ്പവും സങ്കീർണ്ണതയും അനുസരിച്ച് പ്രോസസ്സിംഗിന് സാധാരണയായി 1-3 മിനിറ്റ് എടുക്കും.',
+    
+    // Documents page translations
+    manageSearchDocuments: 'നിങ്ങളുടെ എല്ലാ ഡോക്യുമെന്റുകളും കൈകാര്യം ചെയ്യുകയും തിരയുകയും ചെയ്യുക',
+    showingResults: 'കാണിക്കുന്നു',
+    ofDocuments: 'ൽ',
+    documentsText: 'ഡോക്യുമെന്റുകൾ',
+    latestFirst: 'ഏറ്റവും പുതിയത് ആദ്യം',
+    titleAZ: 'ശീർഷകം A-Z',
+    urgency: 'അടിയന്തിരത',
+    documentType: 'ഡോക്യുമെന്റ് തരം',
+    clearAllFilters: 'എല്ലാ ഫിൽട്ടറുകളും മായ്ക്കുക',
+    noDocumentsFound: 'ഡോക്യുമെന്റുകൾ കണ്ടെത്തിയില്ല',
+    adjustSearchTerms: 'നിങ്ങളുടെ തിരയൽ പദങ്ങളോ ഫിൽട്ടറുകളോ ക്രമീകരിക്കാൻ ശ്രമിക്കുക',
+    
+    // Role selector
+    viewAs: 'ആയി കാണുക',
+    overallSystemOverview: 'മൊത്തത്തിലുള്ള സിസ്റ്റം അവലോകനം',
+    
+    // Auction document specific Q&A
+    auctionQuestions: [
+      'KMRL നീലാമിന്റെ റിസർവ് വില എന്താണ്?',
+      'നീലാമിന്റെ തീയതിയും സമയവും എപ്പോഴാണ്?',
+      'നീലാമിൽ ഏതെല്ലാം ഇനങ്ങൾ ഉൾപ്പെടുന്നു?',
+      'നീലാമിന് മുമ്പ് എനിക്ക് എവിടെ വസ്തുക്കൾ പരിശോധിക്കാം?',
+      'ജാമ്യ തുക എത്രയാണ്?',
+      'ലേലത്തിനുള്ള നിയമങ്ങളും വ്യവസ്ഥകളും എന്തൊക്കെയാണ്?'
+    ],
+    auctionAnswers: [
+      'നീലാമി അറിയിപ്പിൽ എല്ലാ ഇനങ്ങളും "ഏതായാലും എവിടെയായാലും" അടിസ്ഥാനത്തിൽ വിൽക്കുന്നുവെന്ന് പറയുന്നു. വ്യക്തിഗത ഇനങ്ങൾക്ക് പ്രത്യേക റിസർവ് വില പരാമർശിച്ചിട്ടില്ല.',
+      'നീലാമി ഡിസംബർ 28, 2024 രാവിലെ 10:00 മണിക്ക് KMRL അഡ്മിനിസ്ട്രേറ്റീവ് ബിൽഡിംഗിൽ നിർദ്ദിഷ്ടമാണ്.',
+      'നീലാമിൽ റെയിൽവേ ട്രാക്ക് ഘടകങ്ങൾ (റെയിലുകൾ, സ്ലീപ്പറുകൾ, ഫാസ്റ്റനിംഗ് സിസ്റ്റങ്ങൾ), നിർമ്മാണ സാമഗ്രികൾ (സിമന്റ്, സ്റ്റീൽ റീഇൻഫോഴ്സ്മെന്റ്), ഇലക്ട്രിക്കൽ ഉപകരണങ്ങൾ (കേബിളുകൾ, ട്രാൻസ്ഫോർമറുകൾ, കൺട്രോൾ പാനലുകൾ), ഓഫീസ് ഫർണിച്ചറുകൾ (ഡെസ്കുകൾ, കസേരകൾ, ഫയലിംഗ് കാബിനറ്റുകൾ), വാഹന ഭാഗങ്ങൾ (ബസ് സ്പെയർ പാർട്സും മെയിന്റനൻസ് ഉപകരണങ്ങളും) എന്നിവ ഉൾപ്പെടുന്നു.',
+      'ഇനങ്ങളുടെ പരിശോധന ഡിസംബർ 20-21, 2024 ൽ KMRL അഡ്മിനിസ്ട്രേറ്റീവ് ബിൽഡിംഗിൽ നടത്താം.',
+      'രജിസ്ട്രേഷൻ ഫീസ് ₹5,000 (നോൺ-റിഫണ്ടബിൾ) ആണ്. ഇത് ജാമ്യ തുകയായി പ്രവർത്തിക്കുന്നു.',
+      'എല്ലാ ഇനങ്ങളും "ഏതായാലും എവിടെയായാലും" അടിസ്ഥാനത്തിൽ വിൽക്കുന്നു. നീലാമിക്ക് ശേഷം 7 ദിവസത്തിനുള്ളിൽ പേയ്മെന്റ് നടത്തണം. ₹5,000 രജിസ്ട്രേഷൻ ഫീസ് ആവശ്യമാണ്, അത് തിരികെ ലഭിക്കുന്നതല്ല.'
+    ]
   }
 };
 
@@ -362,7 +412,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>('en');
 
   const t = (key: string): string => {
-    return translations[language][key as keyof typeof translations['en']] || key;
+    return translations[language][key] || key;
   };
 
   return (

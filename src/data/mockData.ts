@@ -346,7 +346,7 @@ export const mockMetrics: Record<UserRole, DashboardMetric[]> = {
 export const chatResponses: Record<string, string> = {
   'safety bulletins': 'Found 3 safety bulletins from last week: Platform Safety Guidelines (Malayalam), Emergency Evacuation Procedures, and Track Worker Safety Protocol. All require immediate review.',
   'regulatory directives': 'Current regulatory directives expiring soon: CMRS Compliance Report (5 days), Environmental Impact Assessment (12 days), and Fire Safety Certification (18 days).',
-  'invoice trends': 'Invoice processing has improved by 23% this month. Average processing time: 2.3 days. Pending invoices reduced from 18 to 12. Major vendors: Siemens (₹45L), BEML (₹23L), Alstom (₹18L).',
+  'invoice trends': 'Invoice processing has improved by 23% this month. Average processing time: 2.3 days. Pending invoices reduced from 18 to 12. Major vendors: Siemens, BEML, Alstom.',
   'document status': 'System currently processing 1,247 documents. 156 pending review, 23 require immediate attention, and 8 are awaiting approval. Processing efficiency up 15% this quarter.',
   'maintenance reports': 'Latest maintenance reports show 12 active items: 3 critical track sections, 5 rolling stock issues, and 4 station equipment updates. All scheduled for completion within 10 days.'
 };

@@ -12,6 +12,7 @@ import { mockDocuments, mockNotifications } from '@/data/mockData';
 import { FileText, Grid, List, SortAsc } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { LanguageSelector } from '@/components/layout/LanguageSelector';
 import {
   Select,
   SelectContent,
@@ -186,6 +187,9 @@ export default function Documents() {
             </div>
             
             <div className="flex items-center space-x-2">
+              {/* Language Selector */}
+              <LanguageSelector />
+              
               {/* Sort Options */}
               <Select value={sortBy} onValueChange={handleSortChange}>
                 <SelectTrigger className="w-40">
