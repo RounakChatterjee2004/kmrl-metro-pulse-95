@@ -7,6 +7,7 @@ import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { ProcessingModal } from './ProcessingModal';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface UploadedFile {
   id: string;
@@ -24,6 +25,7 @@ interface UploadZoneProps {
 }
 
 export function UploadZone({ onFilesUploaded, onProcessingComplete }: UploadZoneProps) {
+  const { t } = useLanguage();
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
   const [showProcessingModal, setShowProcessingModal] = useState(false);
   const [processingFileName, setProcessingFileName] = useState('');
@@ -121,20 +123,20 @@ export function UploadZone({ onFilesUploaded, onProcessingComplete }: UploadZone
               <Sparkles className="h-4 w-4 absolute top-0 right-8 text-primary animate-pulse" />
             </div>
             <h3 className="text-lg font-semibold mb-2">
-              {isDragActive ? 'Drop files here' : 'AI-Powered Document Upload'}
+              {isDragActive ? 'Drop files here' : t('aiPoweredUpload')}
             </h3>
             <p className="text-muted-foreground mb-4">
-              Drag and drop your files here, or click to browse
+              {t('dragDropFiles')}
             </p>
             <p className="text-sm text-muted-foreground mb-2">
-              Supports PDF, Word, Excel, and Images (Max 20MB per file)
+              {t('supportsFileTypes')}
             </p>
             <div className="flex items-center justify-center gap-2 text-xs text-primary/80 mb-4">
               <Sparkles className="h-3 w-3" />
-              <span>Automatic AI summarization and metadata extraction</span>
+              <span>{t('automaticAISummarization')}</span>
             </div>
             <Button className="mt-2">
-              Browse Files
+              {t('browseFiles')}
             </Button>
           </div>
         </CardContent>
@@ -144,7 +146,7 @@ export function UploadZone({ onFilesUploaded, onProcessingComplete }: UploadZone
       {uploadedFiles.length > 0 && (
         <Card>
           <CardContent className="p-6">
-            <h3 className="text-lg font-semibold mb-4">Uploaded Files</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('uploadedFiles')}</h3>
             <div className="space-y-3">
               {uploadedFiles.map((file) => (
                 <div

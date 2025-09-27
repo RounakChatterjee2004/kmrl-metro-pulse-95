@@ -6,11 +6,12 @@ import { SearchFilters } from '@/components/documents/SearchFilters';
 import { DocumentCard } from '@/components/documents/DocumentCard';
 import { DocumentPreviewModal } from '@/components/documents/DocumentPreviewModal';
 import { NotificationsPanel } from '@/components/dashboard/NotificationsPanel';
-import { ChatBot } from '@/components/chat/ChatBot';
+import { DocumentChatBot } from '@/components/chat/DocumentChatBot';
 import { Document } from '@/types/document';
 import { mockDocuments, mockNotifications } from '@/data/mockData';
 import { FileText, Grid, List, SortAsc } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/contexts/LanguageContext';
 import {
   Select,
   SelectContent,
@@ -21,7 +22,9 @@ import {
 
 export default function Documents() {
   const [searchParams] = useSearchParams();
+  const { t } = useLanguage();
   const [documents, setDocuments] = useState<Document[]>(mockDocuments);
+  const [currentDocument, setCurrentDocument] = useState<any>(null);
   const [filteredDocuments, setFilteredDocuments] = useState<Document[]>(mockDocuments);
   const [selectedDocument, setSelectedDocument] = useState<Document | null>(null);
   const [showNotifications, setShowNotifications] = useState(false);
@@ -43,6 +46,11 @@ export default function Documents() {
       // Add the new document to the list
       setDocuments(prev => [parsedDoc, ...prev]);
       setFilteredDocuments(prev => [parsedDoc, ...prev]);
+      
+      // Set current document for chatbot if it has auction data
+      if (parsedDoc.hasAuctionData) {
+        setCurrentDocument(parsedDoc);
+      }
       
       // Clear from localStorage
       localStorage.removeItem('newly-processed-document');
@@ -171,9 +179,9 @@ export default function Documents() {
           {/* Header */}
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold">Documents</h1>
+              <h1 className="text-3xl font-bold">{t('documents')}</h1>
               <p className="text-muted-foreground">
-                Manage and search through all your documents
+                {t('manageSearchDocuments')}
               </p>
             </div>
             
@@ -185,10 +193,10 @@ export default function Documents() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="date">Latest First</SelectItem>
-                  <SelectItem value="title">Title A-Z</SelectItem>
-                  <SelectItem value="urgency">Urgency</SelectItem>
-                  <SelectItem value="type">Document Type</SelectItem>
+                  <SelectItem value="date">{t('latestFirst')}</SelectItem>
+                  <SelectItem value="title">{t('titleAZ')}</SelectItem>
+                  <SelectItem value="urgency">{t('urgency')}</SelectItem>
+                  <SelectItem value="type">{t('documentType')}</SelectItem>
                 </SelectContent>
               </Select>
 
@@ -224,11 +232,11 @@ export default function Documents() {
           {/* Results Summary */}
           <div className="flex items-center justify-between text-sm text-muted-foreground">
             <span>
-              Showing {filteredDocuments.length} of {documents.length} documents
+              {t('showingResults')} {filteredDocuments.length} {t('ofDocuments')} {documents.length} {t('documentsText')}
             </span>
             {(searchQuery || Object.keys(filters).length > 0) && (
               <Button variant="ghost" size="sm" onClick={handleClearFilters}>
-                Clear all filters
+                {t('clearAllFilters')}
               </Button>
             )}
           </div>
@@ -255,9 +263,9 @@ export default function Documents() {
           ) : (
             <div className="text-center py-12">
               <FileText className="h-12 w-12 mx-auto mb-4 text-muted-foreground opacity-50" />
-              <h3 className="text-lg font-semibold mb-2">No documents found</h3>
+              <h3 className="text-lg font-semibold mb-2">{t('noDocumentsFound')}</h3>
               <p className="text-muted-foreground">
-                Try adjusting your search terms or filters
+                {t('adjustSearchTerms')}
               </p>
             </div>
           )}
@@ -282,8 +290,8 @@ export default function Documents() {
         </div>
       )}
 
-      {/* ChatBot */}
-      <ChatBot />
+      {/* Document ChatBot */}
+      <DocumentChatBot documentData={currentDocument} />
     </div>
   );
 }

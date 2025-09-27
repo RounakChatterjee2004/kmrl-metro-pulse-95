@@ -88,7 +88,7 @@ export function ChatBot() {
   }
 
   return (
-    <Card className="fixed bottom-6 right-6 w-96 h-[500px] shadow-large flex flex-col">
+    <Card className="fixed bottom-6 right-6 w-96 h-[500px] shadow-large flex flex-col z-50">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="flex items-center space-x-2">
           <div className="rounded-full bg-primary p-1">
@@ -102,15 +102,15 @@ export function ChatBot() {
         </Button>
       </CardHeader>
 
-      <CardContent className="flex-1 flex flex-col space-y-3 p-3">
+      <CardContent className="flex-1 flex flex-col space-y-3 p-3 overflow-hidden">
         {/* Quick Queries */}
-        <div className="flex flex-wrap gap-1">
+        <div className="flex flex-wrap gap-1 overflow-hidden">
           {quickQueries.map((query, index) => (
             <Button
               key={index}
               variant="outline"
               size="sm"
-              className="text-xs h-6"
+              className="text-xs h-6 flex-shrink-0"
               onClick={() => handleQuickQuery(query)}
             >
               {query}
@@ -119,8 +119,8 @@ export function ChatBot() {
         </div>
 
         {/* Messages */}
-        <ScrollArea className="flex-1 pr-3">
-          <div className="space-y-3">
+        <ScrollArea className="flex-1 pr-2">
+          <div className="space-y-3 pr-2">
             {messages.map((message) => (
               <div
                 key={message.id}
@@ -129,18 +129,18 @@ export function ChatBot() {
                 }`}
               >
                 {message.sender === 'bot' && (
-                  <div className="rounded-full bg-primary p-1 mt-1">
+                  <div className="rounded-full bg-primary p-1 mt-1 flex-shrink-0">
                     <Bot className="h-3 w-3 text-primary-foreground" />
                   </div>
                 )}
                 <div
-                  className={`max-w-[80%] rounded-lg p-2 text-xs ${
+                  className={`max-w-[75%] rounded-lg p-2 text-xs break-words ${
                     message.sender === 'user'
                       ? 'bg-primary text-primary-foreground'
                       : 'bg-muted'
                   }`}
                 >
-                  <p className="leading-relaxed">{message.content}</p>
+                  <p className="leading-relaxed whitespace-pre-wrap">{message.content}</p>
                   <p className="text-xs opacity-70 mt-1">
                     {message.timestamp.toLocaleTimeString([], {
                       hour: '2-digit',
@@ -149,7 +149,7 @@ export function ChatBot() {
                   </p>
                 </div>
                 {message.sender === 'user' && (
-                  <div className="rounded-full bg-secondary p-1 mt-1">
+                  <div className="rounded-full bg-secondary p-1 mt-1 flex-shrink-0">
                     <User className="h-3 w-3 text-secondary-foreground" />
                   </div>
                 )}
@@ -157,7 +157,7 @@ export function ChatBot() {
             ))}
             {isTyping && (
               <div className="flex items-start space-x-2">
-                <div className="rounded-full bg-primary p-1 mt-1">
+                <div className="rounded-full bg-primary p-1 mt-1 flex-shrink-0">
                   <Bot className="h-3 w-3 text-primary-foreground" />
                 </div>
                 <div className="bg-muted rounded-lg p-2 text-xs">
@@ -173,15 +173,15 @@ export function ChatBot() {
         </ScrollArea>
 
         {/* Input */}
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 flex-shrink-0">
           <Input
             placeholder="Ask me about documents..."
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && handleSendMessage(inputValue)}
-            className="text-xs"
+            className="text-xs flex-1"
           />
-          <Button size="sm" onClick={() => handleSendMessage(inputValue)}>
+          <Button size="sm" onClick={() => handleSendMessage(inputValue)} className="flex-shrink-0">
             <Send className="h-3 w-3" />
           </Button>
         </div>

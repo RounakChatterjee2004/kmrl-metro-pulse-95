@@ -4,9 +4,10 @@ import { Header } from '@/components/layout/Header';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { UploadZone } from '@/components/upload/UploadZone';
 import { NotificationsPanel } from '@/components/dashboard/NotificationsPanel';
-import { ChatBot } from '@/components/chat/ChatBot';
+import { DocumentChatBot } from '@/components/chat/DocumentChatBot';
 import { mockNotifications } from '@/data/mockData';
 import { toast } from 'sonner';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface UploadedFile {
   id: string;
@@ -19,8 +20,10 @@ interface UploadedFile {
 
 export default function Upload() {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [showNotifications, setShowNotifications] = useState(false);
   const [notifications, setNotifications] = useState(mockNotifications);
+  const [processedDocument, setProcessedDocument] = useState<any>(null);
 
   const unreadNotifications = notifications.filter(n => !n.read).length;
 
@@ -32,6 +35,9 @@ export default function Upload() {
   const handleProcessingComplete = (document: any) => {
     // Store the processed document for the Documents page
     localStorage.setItem('newly-processed-document', JSON.stringify(document));
+    
+    // Set processed document for chatbot
+    setProcessedDocument(document);
     
     toast.success('Document processed successfully!', {
       description: 'Redirecting to document library...'
@@ -62,32 +68,32 @@ export default function Upload() {
         <main className="flex-1 p-6 space-y-6">
           {/* Header */}
           <div>
-            <h1 className="text-3xl font-bold">Upload Documents</h1>
+            <h1 className="text-3xl font-bold">{t('uploadDocuments')}</h1>
             <p className="text-muted-foreground">
-              Upload new documents to the DocuMind AI processing system
+              {t('uploadToDocuMind')}
             </p>
           </div>
 
           {/* Upload Instructions */}
           <div className="rounded-lg border bg-card p-6">
-            <h3 className="text-lg font-semibold mb-3">Upload Guidelines</h3>
+            <h3 className="text-lg font-semibold mb-3">{t('uploadGuidelines')}</h3>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <h4 className="font-medium mb-2">Supported File Types</h4>
+                <h4 className="font-medium mb-2">{t('supportedFileTypes')}</h4>
                 <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>• PDF Documents (.pdf)</li>
-                  <li>• Microsoft Word (.doc, .docx)</li>
-                  <li>• Microsoft Excel (.xls, .xlsx)</li>
-                  <li>• Images (.png, .jpg, .jpeg, .gif)</li>
+                  <li>• {t('pdfDocuments')}</li>
+                  <li>• {t('msWord')}</li>
+                  <li>• {t('msExcel')}</li>
+                  <li>• {t('images')}</li>
                 </ul>
               </div>
               <div>
-                <h4 className="font-medium mb-2">Best Practices</h4>
+                <h4 className="font-medium mb-2">{t('bestPractices')}</h4>
                 <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>• Use descriptive file names</li>
-                  <li>• Maximum file size: 20MB</li>
-                  <li>• Ensure documents are readable</li>
-                  <li>• Include relevant metadata</li>
+                  <li>• {t('descriptiveFileNames')}</li>
+                  <li>• {t('maxFileSize')}</li>
+                  <li>• {t('readableDocuments')}</li>
+                  <li>• {t('relevantMetadata')}</li>
                 </ul>
               </div>
             </div>
@@ -101,20 +107,20 @@ export default function Upload() {
 
           {/* Processing Information */}
           <div className="rounded-lg border bg-card p-6">
-            <h3 className="text-lg font-semibold mb-3">Processing Information</h3>
+            <h3 className="text-lg font-semibold mb-3">{t('processingInfo')}</h3>
             <div className="text-sm text-muted-foreground space-y-2">
               <p>
-                Once uploaded, your documents will be automatically processed by our AI system to:
+                {t('aiProcessingDesc')}
               </p>
               <ul className="ml-4 space-y-1">
-                <li>• Extract key information and metadata</li>
-                <li>• Classify document type and department</li>
-                <li>• Identify urgency level and priority</li>
-                <li>• Generate searchable summaries</li>
-                <li>• Apply multilingual processing (English/Malayalam)</li>
+                <li>• {t('extractKeyInfo')}</li>
+                <li>• {t('classifyDocType')}</li>
+                <li>• {t('identifyUrgency')}</li>
+                <li>• {t('generateSummaries')}</li>
+                <li>• {t('multilingualProcessing')}</li>
               </ul>
               <p className="mt-3">
-                Processing typically takes 1-3 minutes depending on document size and complexity.
+                {t('processingTime')}
               </p>
             </div>
           </div>
@@ -132,8 +138,8 @@ export default function Upload() {
         </div>
       )}
 
-      {/* ChatBot */}
-      <ChatBot />
+      {/* Document ChatBot */}
+      <DocumentChatBot documentData={processedDocument} />
     </div>
   );
 }
