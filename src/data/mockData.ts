@@ -1,5 +1,26 @@
 import { Document, Alert, Notification, DashboardMetric, UserRole } from '@/types/document';
 
+// Helper function to get translated documents
+export const getTranslatedDocuments = (language: string, translations: any): Document[] => {
+  const documentData = translations.documentData[language] || translations.documentData.en;
+  
+  return documentData.map((doc: any, index: number) => ({
+    id: `doc-${index + 1}`,
+    title: doc.title,
+    summary: doc.summary,
+    date: ["9/27/2025", "1/15/2024", "1/14/2024", "1/13/2024", "1/12/2024", "1/11/2024", "1/10/2024"][index],
+    urgency: doc.urgency as 'Critical' | 'Review' | 'Info',
+    type: doc.type,
+    department: doc.department,
+    language: language === 'en' ? 'English' : language === 'hi' ? 'Hindi' : 'Malayalam',
+    tags: doc.tags,
+    fileUrl: `/docs/doc-${index + 1}.pdf`,
+    fileSize: ["1.65 MB", "2.4 MB", "580 KB", "1.2 MB", "890 KB", "3.1 MB", "1.8 MB"][index],
+    version: index < 2 ? "v1" : ["v2", "v1", "v1", "v3", "v1", "v4"][index - 2],
+    hasAuctionData: index === 0
+  }));
+};
+
 export const mockDocuments: Document[] = [
   {
     id: 'kmrl-auction-notice',
@@ -34,6 +55,143 @@ AUCTION DATE: December 28, 2024 at 10:00 AM
 INSPECTION: December 20-21, 2024
 
 Contact: procurement@kochimetro.org | +91-484-2506001`
+  },
+  {
+    id: 'track-maintenance-schedule',
+    title: 'Track Maintenance Schedule Q4 2024',
+    type: 'Engineering Doc',
+    department: 'Engineering',
+    date: new Date().toISOString(),
+    language: 'English',
+    version: 'v2',
+    urgency: 'Critical',
+    summary: 'Comprehensive maintenance schedule for track sections requiring immediate attention before monsoon season.',
+    fileType: 'PDF',
+    fileSize: '2.4 MB',
+    uploadedBy: 'Rajesh Kumar',
+    tags: ['maintenance', 'tracks', 'critical'],
+    content: `Track Maintenance Schedule Q4 2024
+
+    The following track sections require immediate maintenance before the monsoon season:
+    
+    1. Aluva to Pulinchodu - Replace damaged sleepers
+    2. Kalamassery to CUSAT - Repair rail joints
+    3. Edappally to JLN Stadium - Clear vegetation and debris
+    
+    Please ensure all maintenance activities are completed by January 31, 2024.`
+  },
+  {
+    id: 'vendor-payment-invoice',
+    title: 'Vendor Payment Invoice - Siemens',
+    type: 'Invoice',
+    department: 'Finance',
+    date: new Date().toISOString(),
+    language: 'English',
+    version: 'v1',
+    urgency: 'Review',
+    summary: 'Invoice for electrical equipment maintenance and spare parts delivery.',
+    fileType: 'PDF',
+    fileSize: '580 KB',
+    uploadedBy: 'Priya Nair',
+    tags: ['payment', 'vendor', 'siemens'],
+    content: `Siemens Vendor Invoice
+
+    Invoice Number: SIEMENS-2024-01-14
+    Date: January 14, 2024
+    Vendor: Siemens
+    
+    Description: Electrical equipment maintenance and spare parts delivery
+    Amount: ₹2,50,000
+    
+    Please process the payment at the earliest.`
+  },
+  {
+    id: 'platform-safety-guidelines',
+    title: 'സുരക്ഷാ നിർദ്ദേശങ്ങൾ - പ്ലാറ്റ്ഫോം ഏരിയ',
+    type: 'Safety Notice',
+    department: 'Safety',
+    date: new Date().toISOString(),
+    language: 'Malayalam',
+    version: 'v1',
+    urgency: 'Critical',
+    summary: 'Platform area safety guidelines for staff during peak hours and emergency procedures.',
+    fileType: 'PDF',
+    fileSize: '1.2 MB',
+    uploadedBy: 'Suresh Menon',
+    tags: ['safety', 'platform', 'malayalam'],
+    content: `സുരക്ഷാ അറിയിപ്പ് - പ്ലാറ്റ്ഫോം ഏരിയ
+
+    പ്ലാറ്റ്ഫോം ഏരിയയിൽ ജോലി ചെയ്യുന്ന ജീവനക്കാർക്ക് സുരക്ഷാ നിർദ്ദേശങ്ങൾ.
+    
+    1. തിരക്കുള്ള സമയങ്ങളിൽ കൂടുതൽ ശ്രദ്ധിക്കുക.
+    2. അപകടകരമായ സാഹചര്യങ്ങളിൽ അടിയന്തരമായി പ്രതികരിക്കുക.
+    3. സുരക്ഷാ ഉപകരണങ്ങൾ ശരിയായി ഉപയോഗിക്കുക.`
+  },
+  {
+    id: 'new-employee-onboarding',
+    title: 'New Employee Onboarding Checklist',
+    type: 'HR',
+    department: 'HR',
+    date: new Date().toISOString(),
+    language: 'Hybrid',
+    version: 'v3',
+    urgency: 'Info',
+    summary: 'Updated onboarding process for new technical staff including safety certification requirements.',
+    fileType: 'DOCX',
+    fileSize: '890 KB',
+    uploadedBy: 'Maya Joseph',
+    tags: ['hr', 'onboarding', 'certification'],
+    content: `New Employee Onboarding Checklist
+
+    1. Complete safety certification
+    2. Review company policies
+    3. Meet with team members
+    4. Set up workstation`
+  },
+  {
+    id: 'cmrs-compliance-report',
+    title: 'CMRS Compliance Report 2024',
+    type: 'Regulatory Directive',
+    department: 'Safety',
+    date: new Date().toISOString(),
+    language: 'English',
+    version: 'v1',
+    urgency: 'Critical',
+    summary: 'Annual compliance report for Commissioner of Metro Rail Safety with pending action items.',
+    fileType: 'PDF',
+    fileSize: '3.1 MB',
+    uploadedBy: 'Dr. Vinod Krishnan',
+    tags: ['compliance', 'cmrs', 'regulatory'],
+    content: `CMRS Compliance Report 2024
+
+    Pending Action Items:
+    1. Update fire safety protocols
+    2. Conduct safety audit
+    3. Submit updated report by January 31, 2024`
+  },
+  {
+    id: 'rolling-stock-maintenance-log',
+    title: 'Rolling Stock Maintenance Log',
+    type: 'Engineering Doc',
+    department: 'Engineering',
+    date: new Date().toISOString(),
+    language: 'English',
+    version: 'v4',
+    urgency: 'Review',
+    summary: 'Daily maintenance logs for all active metro coaches with identified issues and resolutions.',
+    fileType: 'XLSX',
+    fileSize: '1.8 MB',
+    uploadedBy: 'Arun Pillai',
+    tags: ['maintenance', 'rolling-stock', 'daily-log'],
+    content: `Rolling Stock Maintenance Log
+
+    Date: January 10, 2024
+    
+    Coach Number | Issue | Resolution
+    ------------------------------------
+    101 | Brake failure | Replaced brake pads
+    102 | Door malfunction | Repaired door mechanism
+    103 | AC not working | Recharged AC unit`
   },
   {
     id: '1',

@@ -8,7 +8,7 @@ import { DocumentPreviewModal } from '@/components/documents/DocumentPreviewModa
 import { NotificationsPanel } from '@/components/dashboard/NotificationsPanel';
 import { DocumentChatBot } from '@/components/chat/DocumentChatBot';
 import { Document } from '@/types/document';
-import { mockDocuments, mockNotifications } from '@/data/mockData';
+import { mockDocuments, mockNotifications, getTranslatedDocuments } from '@/data/mockData';
 import { FileText, Grid, List, SortAsc } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -23,10 +23,17 @@ import {
 
 export default function Documents() {
   const [searchParams] = useSearchParams();
-  const { t } = useLanguage();
-  const [documents, setDocuments] = useState<Document[]>(mockDocuments);
+  const { t, language } = useLanguage();
+  
+  // Get all translations object for passing to helper function
+  const allTranslations = {
+    documentData: t('documentData')
+  };
+  
+  const translatedDocuments = getTranslatedDocuments(language, allTranslations);
+  const [documents, setDocuments] = useState<Document[]>(translatedDocuments);
   const [currentDocument, setCurrentDocument] = useState<any>(null);
-  const [filteredDocuments, setFilteredDocuments] = useState<Document[]>(mockDocuments);
+  const [filteredDocuments, setFilteredDocuments] = useState<Document[]>(translatedDocuments);
   const [selectedDocument, setSelectedDocument] = useState<Document | null>(null);
   const [showNotifications, setShowNotifications] = useState(false);
   const [notifications, setNotifications] = useState(mockNotifications);
@@ -37,6 +44,16 @@ export default function Documents() {
   const [highlightedDocId, setHighlightedDocId] = useState<string | null>(null);
 
   const unreadNotifications = notifications.filter(n => !n.read).length;
+
+  // Update documents when language changes
+  useEffect(() => {
+    const allTranslations = {
+      documentData: t('documentData')
+    };
+    const newTranslatedDocuments = getTranslatedDocuments(language, allTranslations);
+    setDocuments(newTranslatedDocuments);
+    setFilteredDocuments(newTranslatedDocuments);
+  }, [language, t]);
 
   useEffect(() => {
     // Check for newly processed document from localStorage
