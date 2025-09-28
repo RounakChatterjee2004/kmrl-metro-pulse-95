@@ -77,6 +77,8 @@ const translations = {
     cloudSyncDesc: 'Cloud storage synchronization',
     vendorApiDesc: 'External vendor document API',
     manageAll: 'Manage All',
+    documentSources: 'Document Sources',
+    error: 'Error',
     
     // Upload page translations
     uploadDocuments: 'Upload Documents',
@@ -209,6 +211,8 @@ const translations = {
     cloudSyncDesc: 'क्लाउड स्टोरेज सिंक्रोनाइज़ेशन',
     vendorApiDesc: 'बाहरी विक्रेता दस्तावेज़ API',
     manageAll: 'सभी प्रबंधित करें',
+    documentSources: 'दस्तावेज़ स्रोत',
+    error: 'त्रुटि',
     
     // Upload page translations
     uploadDocuments: 'दस्तावेज़ अपलोड करें',
@@ -341,6 +345,8 @@ const translations = {
     cloudSyncDesc: 'ക്ലൗഡ് സ്റ്റോറേജ് സിൻക്രൊണൈസേഷൻ',
     vendorApiDesc: 'ബാഹ്യ വെണ്ടർ ഡോക്യുമെന്റ് API',
     manageAll: 'എല്ലാം കൈകാര്യം ചെയ്യുക',
+    documentSources: 'ഡോക്യുമെന്റ് ഉറവിടങ്ങൾ',
+    error: 'പിശക്',
     
     // Upload page translations
     uploadDocuments: 'രേഖകൾ അപ്ലോഡ് ചെയ്യുക',
@@ -621,6 +627,9 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }
     if (key === 'connectorData') {
       return connectorTranslations;
+    }
+    if (key === 'documentSourceData') {
+      return connectorTranslations; // Use same data for document sources
     }
     
     // For other string translations
