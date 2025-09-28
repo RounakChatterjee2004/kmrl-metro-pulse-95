@@ -5,7 +5,7 @@ export type Language = 'en' | 'hi' | 'ml';
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: string) => any;
+  t: (key: string) => string;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -77,8 +77,6 @@ const translations = {
     cloudSyncDesc: 'Cloud storage synchronization',
     vendorApiDesc: 'External vendor document API',
     manageAll: 'Manage All',
-    documentSources: 'Document Sources',
-    error: 'Error',
     
     // Upload page translations
     uploadDocuments: 'Upload Documents',
@@ -211,8 +209,6 @@ const translations = {
     cloudSyncDesc: 'क्लाउड स्टोरेज सिंक्रोनाइज़ेशन',
     vendorApiDesc: 'बाहरी विक्रेता दस्तावेज़ API',
     manageAll: 'सभी प्रबंधित करें',
-    documentSources: 'दस्तावेज़ स्रोत',
-    error: 'त्रुटि',
     
     // Upload page translations
     uploadDocuments: 'दस्तावेज़ अपलोड करें',
@@ -345,8 +341,6 @@ const translations = {
     cloudSyncDesc: 'ക്ലൗഡ് സ്റ്റോറേജ് സിൻക്രൊണൈസേഷൻ',
     vendorApiDesc: 'ബാഹ്യ വെണ്ടർ ഡോക്യുമെന്റ് API',
     manageAll: 'എല്ലാം കൈകാര്യം ചെയ്യുക',
-    documentSources: 'ഡോക്യുമെന്റ് ഉറവിടങ്ങൾ',
-    error: 'പിശക്',
     
     // Upload page translations
     uploadDocuments: 'രേഖകൾ അപ്ലോഡ് ചെയ്യുക',
@@ -414,231 +408,15 @@ const translations = {
   }
 };
 
-const documentTranslations = {
-  en: [
-    {
-      title: "KMRL Public Auction Notice - Surplus Materials Sale",
-      summary: "Official auction notice from Kochi Metro Rail Limited for surplus materials including track components, construction materials, electrical equipment, office furniture, and vehicle parts. Auction scheduled for December 28, 2024 with registration fee of ₹5,000.",
-      urgency: "Review",
-      type: "Regulatory Directive",
-      department: "Procurement",
-      tags: ["AI-Processed", "Legal/Regulatory", "Analytics-Ready"]
-    },
-    {
-      title: "Track Maintenance Schedule Q4 2024", 
-      summary: "Comprehensive maintenance schedule for track sections requiring immediate attention before monsoon season.",
-      urgency: "Critical",
-      type: "Engineering Doc",
-      department: "Engineering",
-      tags: ["maintenance", "tracks", "critical"]
-    },
-    {
-      title: "Vendor Payment Invoice - Siemens",
-      summary: "Invoice for electrical equipment maintenance and spare parts delivery.",
-      urgency: "Review", 
-      type: "Invoice",
-      department: "Finance",
-      tags: ["payment", "vendor", "siemens"]
-    },
-    {
-      title: "Platform Area Safety Guidelines",
-      summary: "Platform area safety guidelines for staff during peak hours and emergency procedures.",
-      urgency: "Critical",
-      type: "Safety Notice", 
-      department: "Safety",
-      tags: ["safety", "platform", "malayalam"]
-    },
-    {
-      title: "New Employee Onboarding Checklist",
-      summary: "Updated onboarding process for new technical staff including safety certification requirements.",
-      urgency: "Info",
-      type: "HR",
-      department: "HR", 
-      tags: ["hr", "onboarding", "certification"]
-    },
-    {
-      title: "CMRS Compliance Report 2024",
-      summary: "Annual compliance report for Commissioner of Metro Rail Safety with pending action items.",
-      urgency: "Critical",
-      type: "Regulatory Directive",
-      department: "Safety",
-      tags: ["compliance", "cmrs", "regulatory"]
-    },
-    {
-      title: "Rolling Stock Maintenance Log",
-      summary: "Daily maintenance logs for all active metro coaches with identified issues and resolutions.",
-      urgency: "Review",
-      type: "Engineering Doc", 
-      department: "Engineering",
-      tags: ["maintenance", "rolling-stock", "daily-log"]
-    }
-  ],
-  hi: [
-    {
-      title: "केएमआरएल सार्वजनिक नीलामी सूचना - अधिशेष सामग्री बिक्री",
-      summary: "कोच्चि मेट्रो रेल लिमिटेड की अधिशेष सामग्री जैसे ट्रैक घटक, निर्माण सामग्री, विद्युत उपकरण, कार्यालय फर्नीचर और वाहन के पुर्ज़ों के लिए आधिकारिक नीलामी सूचना।",
-      urgency: "समीक्षा",
-      type: "नियामक निर्देश", 
-      department: "क्रय",
-      tags: ["एआई-प्रसंस्कृत", "कानूनी/नियामक", "विश्लेषण-तैयार"]
-    },
-    {
-      title: "ट्रैक रखरखाव अनुसूची Q4 2024",
-      summary: "मानसून से पहले तत्काल ध्यान की आवश्यकता वाले ट्रैक सेक्शन की व्यापक रखरखाव अनुसूची।",
-      urgency: "महत्वपूर्ण",
-      type: "इंजीनियरिंग दस्तावेज़",
-      department: "इंजीनियरिंग", 
-      tags: ["रखरखाव", "ट्रैक", "महत्वपूर्ण"]
-    },
-    {
-      title: "विक्रेता भुगतान चालान - सीमेंस",
-      summary: "विद्युत उपकरणों के रखरखाव और स्पेयर पार्ट्स डिलीवरी का चालान।",
-      urgency: "समीक्षा",
-      type: "चालान",
-      department: "वित्त",
-      tags: ["भुगतान", "विक्रेता", "सीमेंस"]
-    },
-    {
-      title: "प्लेटफ़ॉर्म क्षेत्र सुरक्षा दिशानिर्देश", 
-      summary: "भीड़ के समय और आपातकालीन प्रक्रियाओं के दौरान कर्मचारियों के लिए प्लेटफ़ॉर्म क्षेत्र सुरक्षा दिशानिर्देश।",
-      urgency: "महत्वपूर्ण",
-      type: "सुरक्षा सूचना",
-      department: "सुरक्षा",
-      tags: ["सुरक्षा", "प्लेटफ़ॉर्म", "मलयालम"]
-    },
-    {
-      title: "नए कर्मचारी ऑनबोर्डिंग चेकलिस्ट",
-      summary: "नए तकनीकी कर्मचारियों के लिए सुरक्षा प्रमाणन आवश्यकताओं सहित अद्यतन ऑनबोर्डिंग प्रक्रिया।",
-      urgency: "सूचना",
-      type: "मानव संसाधन",
-      department: "एचआर",
-      tags: ["एचआर", "ऑनबोर्डिंग", "प्रमाणीकरण"]
-    },
-    {
-      title: "सीएमआरएस अनुपालन रिपोर्ट 2024",
-      summary: "मेट्रो रेल सुरक्षा आयुक्त के लिए वार्षिक अनुपालन रिपोर्ट जिसमें लंबित कार्य शामिल हैं।",
-      urgency: "महत्वपूर्ण",
-      type: "नियामक निर्देश",
-      department: "सुरक्षा",
-      tags: ["अनुपालन", "सीएमआरएस", "नियामक"]
-    },
-    {
-      title: "रोलिंग स्टॉक रखरखाव लॉग",
-      summary: "सभी सक्रिय मेट्रो कोचों के लिए दैनिक रखरखाव लॉग जिसमें पहचानी गई समस्याएं और समाधान शामिल हैं।",
-      urgency: "समीक्षा", 
-      type: "इंजीनियरिंग दस्तावेज़",
-      department: "इंजीनियरिंग",
-      tags: ["रखरखाव", "रोलिंग-स्टॉक", "दैनिक-लॉग"]
-    }
-  ],
-  ml: [
-    {
-      title: "കെഎംആർഎൽ പൊതുവില്പന അറിയിപ്പ് - അധിക സാമഗ്രികളുടെ ലേലം",
-      summary: "കോച്ചി മെട്രോ റെയിൽ ലിമിറ്റഡിന്റെ അധിക സാമഗ്രികൾക്ക്, ട്രാക്ക് ഘടകങ്ങൾ, നിർമ്മാണ സാമഗ്രികൾ, വൈദ്യുതി ഉപകരണങ്ങൾ, ഓഫീസ് ഫർണിച്ചർ, വാഹന ഭാഗങ്ങൾ ഉൾപ്പെടെ ഔദ്യോഗിക ലേലം അറിയിപ്പ്।",
-      urgency: "റിവ്യൂ",
-      type: "നിയന്ത്രണ നിർദ്ദേശം",
-      department: "പ്രോക്യൂർമെന്റ്",
-      tags: ["AI-പ്രോസസ്ഡ്", "നിയമ/നിയന്ത്രണ", "വിശകലന-തയ്യാർ"]
-    },
-    {
-      title: "ട്രാക്ക് പരിപാലന ഷെഡ്യൂൾ Q4 2024",
-      summary: "മൺസൂൺ സീസണിന് മുമ്പ് അടിയന്തര ശ്രദ്ധ ആവശ്യമായ ട്രാക്ക് സെക്ഷനുകളുടെ സമഗ്രമായ പരിപാലന ഷെഡ്യൂൾ.",
-      urgency: "ക്രിറ്റിക്കൽ",
-      type: "എഞ്ചിനീയറിംഗ് ഡോക്",
-      department: "എഞ്ചിനീയറിംഗ്",
-      tags: ["പരിപാലനം", "ട്രാക്കുകൾ", "ക്രിറ്റിക്കൽ"]
-    },
-    {
-      title: "വെൻഡർ പേയ്മെന്റ് ഇൻവോയ്സ് - സിമൻസ്", 
-      summary: "വൈദ്യുതി ഉപകരണ പരിപാലനത്തിനും സ്പെയർ പാർട്സ് വിതരണത്തിനും വേണ്ട ഇൻവോയ്സ്।",
-      urgency: "റിവ്യൂ",
-      type: "ഇൻവോയ്സ്",
-      department: "ഫിനാൻസ്",
-      tags: ["പേയ്മെന്റ്", "വെൻഡർ", "സിമൻസ്"]
-    },
-    {
-      title: "സുരക്ഷാ നിർദ്ദേശങ്ങൾ - പ്ലാറ്റ്ഫോം ഏരിയ",
-      summary: "പീക്ക് സമയങ്ങളിലും അടിയന്തര നടപടികളിലും സ്റ്റാഫിനായി പ്ലാറ്റ്ഫോം ഏരിയ സുരക്ഷാ നിർദ്ദേശങ്ങൾ.",
-      urgency: "ക്രിറ്റിക്കൽ", 
-      type: "സേഫ്റ്റി നോട്ടീസ്",
-      department: "സേഫ്റ്റി",
-      tags: ["സുരക്ഷ", "പ്ലാറ്റ്ഫോം", "മലയാളം"]
-    },
-    {
-      title: "പുതിയ ജീവനക്കാരുടെ ഓൺബോർഡിംഗ് ചെക്ക്ലിസ്റ്റ്",
-      summary: "പുതിയ ടെക്നിക്കൽ സ്റ്റാഫിനുള്ള സുരക്ഷാ സർട്ടിഫിക്കേഷൻ ആവശ്യകതകൾ ഉൾപ്പെടെയുള്ള പുതുക്കിയ ഓൺബോർഡിംഗ് പ്രക്രിയ.",
-      urgency: "ഇൻഫോ",
-      type: "എച്ച്ആർ",
-      department: "എച്ച്ആർ",
-      tags: ["എച്ച്ആർ", "ഓൺബോർഡിംഗ്", "സർട്ടിഫിക്കേഷൻ"]
-    },
-    {
-      title: "CMRS കംപ്ലയൻസ് റിപ്പോർട്ട് 2024",
-      summary: "മെട്രോ റെയിൽ സുരക്ഷാ കമ്മീഷണറുടെ വാർഷിക കംപ്ലയൻസ് റിപ്പോർട്ട്, ബാക്കിയുള്ള പ്രവർത്തന ഇനങ്ങളോടൊപ്പം।",
-      urgency: "ക്രിറ്റിക്കൽ",
-      type: "നിയന്ത്രണ നിർദ്ദേശം",
-      department: "സേഫ്റ്റി",
-      tags: ["കംപ്ലയൻസ്", "CMRS", "നിയന്ത്രണ"]
-    },
-    {
-      title: "റോളിംഗ് സ്റ്റോക്ക് പരിപാലന ലോഗ്",
-      summary: "എല്ലാ സജീവ മെട്രോ കോച്ചുകൾക്കായുള്ള ദിനസരിപാലന ലോഗുകൾ, കണ്ടെത്തിയ പ്രശ്നങ്ങളും പരിഹാരങ്ങളും ഉൾപ്പെടെ.",
-      urgency: "റിവ്യൂ",
-      type: "എഞ്ചിനീയറിംഗ് ഡോക്",
-      department: "എഞ്ചിനീയറിംഗ്",
-      tags: ["പരിപാലനം", "റോളിംഗ്-സ്റ്റോക്ക്", "ഡെയിലി-ലോഗ്"]
-    }
-  ]
-};
-
-const connectorTranslations = {
-  en: [
-    { title: "Email", description: "Inbox & attachments", lastSync: "Last sync: 2 minutes ago" },
-    { title: "Maximo Exports", description: "Maintenance & job cards", lastSync: "Last sync: 15 minutes ago" },
-    { title: "SharePoint", description: "Document repositories", lastSync: "Last sync: 1 hour ago" },
-    { title: "WhatsApp", description: "PDFs & scanned documents" },
-    { title: "Hard-Copy Scans", description: "Drag-and-drop uploads", lastSync: "Last sync: 30 minutes ago" },
-    { title: "Ad-Hoc Cloud Links", description: "External file sharing", lastSync: "Last sync: 2 hours ago" }
-  ],
-  hi: [
-    { title: "ईमेल", description: "इनबॉक्स और संलग्नक", lastSync: "अंतिम समन्वय: 2 मिनट पहले" },
-    { title: "मैक्सिमो निर्यात", description: "रखरखाव और जॉब कार्ड", lastSync: "अंतिम समन्वय: 15 मिनट पहले" },
-    { title: "शेयरपॉइंट", description: "दस्तावेज़ भंडार", lastSync: "अंतिम समन्वय: 1 घंटा पहले" },
-    { title: "व्हाट्सएप", description: "पीडीएफ और स्कैन किए गए दस्तावेज़" },
-    { title: "हार्ड-कॉपी स्कैन", description: "ड्रैग-एंड-ड्रॉप अपलोड", lastSync: "अंतिम समन्वय: 30 मिनट पहले" },
-    { title: "एड-हॉक क्लाउड लिंक", description: "बाहरी फ़ाइल साझा करना", lastSync: "अंतिम समन्वय: 2 घंटे पहले" }
-  ],
-  ml: [
-    { title: "ഇമെയിൽ", description: "ഇൻബോക്സ് & അറ്റാച്ച്മെന്റുകൾ", lastSync: "അവസാന സിങ്ക്: 2 മിനിറ്റ് മുമ്പ്" },
-    { title: "മാക്സിമോ എക്സ്പോർട്ടുകൾ", description: "മെന്റനൻസ് & ജോബ് കാർഡുകൾ", lastSync: "അവസാന സിങ്ക്: 15 മിനിറ്റ് മുമ്പ്" },
-    { title: "ഷെയർപോയിന്റ്", description: "ഡോക്യുമെന്റ് റെപ്പോസിറ്ററികൾ", lastSync: "അവസാന സിങ്ക്: 1 മണിക്കൂർ മുമ്പ്" },
-    { title: "വാട്ട്സ്ആപ്പ്", description: "PDFകളും സ്കാൻ ചെയ്ത ഡോക്യുമെന്റുകളും" },
-    { title: "ഹാർഡ്-കോപ്പി സ്കാൻസ്", description: "ഡ്രാഗ്-അൻഡ്-ഡ്രോപ്പ് അപ്ലോഡുകൾ", lastSync: "അവസാന സിങ്ക്: 30 മിനിറ്റ് മുമ്പ്" },
-    { title: "ആഡ്-ഹോക്ക് ക്ലൗഡ് ലിങ്കുകൾ", description: "ബാഹ്യ ഫയൽ ഷെയറിംഗ്", lastSync: "അവസാന സിങ്ക്: 2 മണിക്കൂർ മുമ്പ്" }
-  ]
-};
-
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>('en');
 
-  const t = (key: string): any => {
-    if (key === 'documentData') {
-      return documentTranslations;
-    }
-    if (key === 'connectorData') {
-      return connectorTranslations;
-    }
-    if (key === 'documentSourceData') {
-      return connectorTranslations; // Use same data for document sources
-    }
-    
-    // For other string translations
+  const t = (key: string): string => {
     return translations[language][key] || key;
   };
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t }}>
-      {children}
       {children}
     </LanguageContext.Provider>
   );

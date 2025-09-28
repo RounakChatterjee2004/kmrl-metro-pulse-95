@@ -22,71 +22,43 @@ interface Connector {
   lastSync?: string;
 }
 
-// Helper function to get translated connectors
-const getTranslatedConnectors = (language: string, translations: any): Connector[] => {
-  const connectorData = translations.connectorData[language] || translations.connectorData.en;
-  
-  return [
-    {
-      id: '1',
-      name: connectorData[0].title,
-      type: 'email' as const,
-      status: 'connected' as const,
-      description: connectorData[0].description,
-      lastSync: connectorData[0].lastSync
-    },
-    {
-      id: '2', 
-      name: connectorData[1].title,
-      type: 'database' as const,
-      status: 'connected' as const,
-      description: connectorData[1].description,
-      lastSync: connectorData[1].lastSync
-    },
-    {
-      id: '3',
-      name: connectorData[2].title,
-      type: 'cloud' as const,
-      status: 'syncing' as const,
-      description: connectorData[2].description,
-      lastSync: connectorData[2].lastSync
-    },
-    {
-      id: '4',
-      name: connectorData[3].title,
-      type: 'api' as const,
-      status: 'disconnected' as const,
-      description: connectorData[3].description,
-      lastSync: connectorData[3].lastSync || ''
-    },
-    {
-      id: '5',
-      name: connectorData[4].title,
-      type: 'cloud' as const,
-      status: 'connected' as const,
-      description: connectorData[4].description,
-      lastSync: connectorData[4].lastSync
-    },
-    {
-      id: '6',
-      name: connectorData[5].title,
-      type: 'api' as const,
-      status: 'disconnected' as const,
-      description: connectorData[5].description,
-      lastSync: connectorData[5].lastSync
-    }
-  ];
-};
+const connectors: Connector[] = [
+  {
+    id: '1',
+    name: 'KMRL Email System',
+    type: 'email',
+    status: 'connected',
+    description: 'Official KMRL email integration for document reception',
+    lastSync: '2 minutes ago'
+  },
+  {
+    id: '2',
+    name: 'Metro Database',
+    type: 'database',
+    status: 'connected',
+    description: 'Main operational database connection',
+    lastSync: '5 minutes ago'
+  },
+  {
+    id: '3',
+    name: 'Document Cloud',
+    type: 'cloud',
+    status: 'syncing',
+    description: 'Cloud storage synchronization',
+    lastSync: 'Syncing now...'
+  },
+  {
+    id: '4',
+    name: 'Vendor Portal API',
+    type: 'api',
+    status: 'disconnected',
+    description: 'External vendor document API',
+    lastSync: '2 hours ago'
+  }
+];
 
 export function ConnectorsPanel() {
-  const { t, language } = useLanguage();
-  
-  // Get all translations object for passing to helper function
-  const allTranslations = {
-    connectorData: t('connectorData')
-  };
-  
-  const connectors = getTranslatedConnectors(language, allTranslations);
+  const { t } = useLanguage();
 
   const getConnectorIcon = (type: Connector['type']) => {
     switch (type) {
@@ -116,9 +88,9 @@ export function ConnectorsPanel() {
 
   const getStatusBadge = (status: Connector['status']) => {
     switch (status) {
-      case 'connected': return { variant: 'default' as const, text: t('connected') };
-      case 'syncing': return { variant: 'secondary' as const, text: t('syncing') };
-      case 'disconnected': return { variant: 'destructive' as const, text: t('disconnected') };
+      case 'connected': return { variant: 'default' as const, text: 'Connected' };
+      case 'syncing': return { variant: 'secondary' as const, text: 'Syncing' };
+      case 'disconnected': return { variant: 'destructive' as const, text: 'Disconnected' };
     }
   };
 
@@ -158,7 +130,7 @@ export function ConnectorsPanel() {
                   {connector.lastSync && (
                     <div className="flex items-center space-x-1 text-xs text-muted-foreground">
                       <StatusIcon className={`h-3 w-3 ${getStatusColor(connector.status)}`} />
-                      <span>{connector.lastSync}</span>
+                      <span>Last sync: {connector.lastSync}</span>
                     </div>
                   )}
                 </div>
@@ -173,15 +145,10 @@ export function ConnectorsPanel() {
         <div className="pt-2 border-t">
           <div className="flex items-center justify-between text-xs">
             <span className="text-muted-foreground">
-              {connectors.filter(c => c.status === 'connected').length} {t('of')} {connectors.length} {t('sourcesActive')}
+              {connectors.filter(c => c.status === 'connected').length} of {connectors.length} connected
             </span>
-            <span className="text-xs text-muted-foreground">
-              {t('autoSyncEnabled')}
-            </span>
-          </div>
-          <div className="mt-2">
-            <Button variant="outline" size="sm" className="h-6 text-xs w-full">
-              {t('manageAll')}
+            <Button variant="outline" size="sm" className="h-6 text-xs">
+              Manage All
             </Button>
           </div>
         </div>

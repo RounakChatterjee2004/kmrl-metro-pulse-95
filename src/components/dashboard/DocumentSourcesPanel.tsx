@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { useLanguage } from '@/contexts/LanguageContext';
 import {
   Mail,
   Database,
@@ -23,92 +22,64 @@ interface DocumentSource {
   lastSync?: string;
 }
 
-// Helper function to get translated document sources
-const getTranslatedSources = (language: string, translations: any): DocumentSource[] => {
-  const sourceData = translations.documentSourceData[language] || translations.documentSourceData.en;
-  
-  const iconMap = {
-    email: <Mail className="h-5 w-5" />,
-    maximo: <Database className="h-5 w-5" />,
-    sharepoint: <Globe className="h-5 w-5" />,
-    whatsapp: <MessageCircle className="h-5 w-5" />,
-    scans: <FileImage className="h-5 w-5" />,
-    cloud: <Cloud className="h-5 w-5" />
-  };
-
-  return [
-    {
-      id: 'email',
-      name: sourceData[0].title,
-      description: sourceData[0].description,
-      icon: iconMap.email,
-      enabled: true,
-      status: 'connected' as const,
-      lastSync: sourceData[0].lastSync
-    },
-    {
-      id: 'maximo',
-      name: sourceData[1].title,
-      description: sourceData[1].description,
-      icon: iconMap.maximo,
-      enabled: true,
-      status: 'connected' as const,
-      lastSync: sourceData[1].lastSync
-    },
-    {
-      id: 'sharepoint',
-      name: sourceData[2].title,
-      description: sourceData[2].description,
-      icon: iconMap.sharepoint,
-      enabled: true,
-      status: 'connected' as const,
-      lastSync: sourceData[2].lastSync
-    },
-    {
-      id: 'whatsapp',
-      name: sourceData[3].title,
-      description: sourceData[3].description,
-      icon: iconMap.whatsapp,
-      enabled: false,
-      status: 'disconnected' as const
-    },
-    {
-      id: 'scans',
-      name: sourceData[4].title,
-      description: sourceData[4].description,
-      icon: iconMap.scans,
-      enabled: true,
-      status: 'connected' as const,
-      lastSync: sourceData[4].lastSync
-    },
-    {
-      id: 'cloud',
-      name: sourceData[5].title,
-      description: sourceData[5].description,
-      icon: iconMap.cloud,
-      enabled: true,
-      status: 'error' as const,
-      lastSync: sourceData[5].lastSync
-    }
-  ];
-};
+const initialSources: DocumentSource[] = [
+  {
+    id: 'email',
+    name: 'Email',
+    description: 'Inbox & attachments',
+    icon: <Mail className="h-5 w-5" />,
+    enabled: true,
+    status: 'connected',
+    lastSync: '2 minutes ago'
+  },
+  {
+    id: 'maximo',
+    name: 'Maximo Exports',
+    description: 'Maintenance & job cards',
+    icon: <Database className="h-5 w-5" />,
+    enabled: true,
+    status: 'connected',
+    lastSync: '15 minutes ago'
+  },
+  {
+    id: 'sharepoint',
+    name: 'SharePoint',
+    description: 'Document repositories',
+    icon: <Globe className="h-5 w-5" />,
+    enabled: true,
+    status: 'connected',
+    lastSync: '1 hour ago'
+  },
+  {
+    id: 'whatsapp',
+    name: 'WhatsApp',
+    description: 'PDFs & scanned documents',
+    icon: <MessageCircle className="h-5 w-5" />,
+    enabled: false,
+    status: 'disconnected'
+  },
+  {
+    id: 'scans',
+    name: 'Hard-Copy Scans',
+    description: 'Drag-and-drop uploads',
+    icon: <FileImage className="h-5 w-5" />,
+    enabled: true,
+    status: 'connected',
+    lastSync: '30 minutes ago'
+  },
+  {
+    id: 'cloud',
+    name: 'Ad-Hoc Cloud Links',
+    description: 'External file sharing',
+    icon: <Cloud className="h-5 w-5" />,
+    enabled: true,
+    status: 'error',
+    lastSync: '2 hours ago'
+  }
+];
 
 export function DocumentSourcesPanel() {
-  const { t, language } = useLanguage();
-  
-  // Get all translations object for passing to helper function
-  const allTranslations = {
-    documentSourceData: t('documentSourceData')
-  };
-  
-  const translatedSources = getTranslatedSources(language, allTranslations);
-  const [sources, setSources] = useState(translatedSources);
-
-  // Update sources when language changes
-  useEffect(() => {
-    const newTranslatedSources = getTranslatedSources(language, allTranslations);
-    setSources(newTranslatedSources);
-  }, [language]);
+  const [sources, setSources] = useState(initialSources);
 
   const handleToggle = (id: string) => {
     setSources(prev =>
@@ -138,18 +109,18 @@ export function DocumentSourcesPanel() {
   const getStatusText = (status: string) => {
     switch (status) {
       case 'connected':
-        return t('connected');
+        return 'Connected';
       case 'error':
-        return t('error');
+        return 'Error';
       default:
-        return t('disconnected');
+        return 'Disconnected';
     }
   };
 
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
-        <CardTitle className="text-lg font-semibold">{t('documentSources')}</CardTitle>
+        <CardTitle className="text-lg font-semibold">Document Sources</CardTitle>
         <Settings className="h-4 w-4 text-muted-foreground" />
       </CardHeader>
       <CardContent className="space-y-4">
@@ -178,7 +149,7 @@ export function DocumentSourcesPanel() {
             <div className="flex items-center space-x-2">
               {source.status === 'error' && (
                 <Badge variant="destructive" className="text-xs">
-                  {t('error')}
+                  Error
                 </Badge>
               )}
               <Switch
@@ -192,11 +163,11 @@ export function DocumentSourcesPanel() {
         <div className="pt-2 border-t">
           <div className="flex items-center justify-between text-xs text-muted-foreground">
             <span>
-              {sources.filter(s => s.enabled).length} {t('of')} {sources.length} {t('sourcesActive')}
+              {sources.filter(s => s.enabled).length} of {sources.length} sources active
             </span>
             <span className="flex items-center space-x-1">
               <div className="w-2 h-2 rounded-full bg-success animate-pulse" />
-              <span>{t('autoSyncEnabled')}</span>
+              <span>Auto-sync enabled</span>
             </span>
           </div>
         </div>
